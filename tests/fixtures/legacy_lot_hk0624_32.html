@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html class="LotPage" lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    
+    <link rel="preconnect" href="https://cdn.fonts.net">
+    <link rel="stylesheet"
+        href="https://cdn.fonts.net/kit/604aed6c-1d0b-4404-bedd-e585cecd62fc/604aed6c-1d0b-4404-bedd-e585cecd62fc.css">
+    
+    
+    <script src="https://cdn-ukwest.onetrust.com/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8"
+        data-domain-script=7754d653-fe9e-40b1-b526-f0bb1a6ea107></script>
+    <script src="/etc/designs/shared/js/stb-global.js"></script>
+    
+    
+    <script>
+        !(function () {
+            var analytics = window.analytics = window.analytics || [];
+            if (!analytics.initialize) {
+                if (analytics.invoked) {
+                    window.console && console.error && console.error("Segment snippet included twice.");
+                } else {
+                    analytics.invoked = !0;
+                    analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addDestinationMiddleware"];
+                    analytics.factory = function (t) { return function () { var e = Array.prototype.slice.call(arguments); e.unshift(t); analytics.push(e); return analytics } };
+                    for (var t = 0; t < analytics.methods.length; t++) {
+                        var e = analytics.methods[t];
+                        analytics[e] = analytics.factory(e)
+                    }
+                    analytics.load = function (t, e) {
+                        var n = document.createElement("script");
+                        n.type = "text/javascript";
+                        n.async = !0;
+                        n.src = ("https:" === document.location.protocol ? "https://" : "http://") + "cdn.segment.com/analytics.js/v1/" + t + "/analytics.min.js";
+                        var o = document.getElementsByTagName("script")[0];
+                        o.parentNode.insertBefore(n, o);
+                        analytics._loadOptions = e
+                    };
+                    analytics.SNIPPET_VERSION = "4.1.0";
+
+                    // Fixed syntax for IE11 and consent manager check
+                    if (!!navigator.userAgent.match(/Trident\/7\./)) {
+                        analytics.load("3DPSfpG4OjRBGEMqXhG0ZZsFghihTZso");
+                    }
+                }
+            }
+        })();
+
+        function OptanonWrapper() {
+            const isPreview = window.name.includes('PreviewFrame-preview')
+
+            window.addEventListener('animationend', event => {
+                const onetrustLoaded = event.animationName === 'onetrust-fade-in'
+                if (onetrustLoaded && isPreview && window.Optanon) window.Optanon.Close()
+            })
+
+            if (!navigator.userAgent.match(/Trident\/7\./) && !isPreview) { // disable on IE11
+                const DEBUG_LABEL = 'SEGMENT_DEBUG';
+                const debug = window.localStorage.getItem(DEBUG_LABEL) === 'true';
+
+                // Uses Segment CMP wrapper to pass consent object instead of integrations object
+                try {
+                    if (hasCookie('OptanonConsent')) {
+                        if (window.SothebysShared && window.SothebysShared.wrapWithSegmentCMP) {
+                            var wrappedAnalytics = window.SothebysShared.wrapWithSegmentCMP(analytics);
+                            wrappedAnalytics.load("3DPSfpG4OjRBGEMqXhG0ZZsFghihTZso");
+                            if (debug) console.log('Segment loaded with CMP wrapper');
+                        } else if (debug) {
+                            console.warn('SothebysShared.wrapWithSegmentCMP not available; Segment was not loaded. Ensure stb-global.js is deployed and loaded before Page-head.');
+                        }
+                        window.addEventListener("OTConsentApplied", onOneTrustChanged);
+                    }
+                    function onOneTrustChanged() {
+                        window.location.reload();
+                    }
+                } catch (e) {
+                    if (debug) console.error(e);
+                };
+
+                function hasCookie(name) {
+                    return getCookie(name) != null;
+                }
+
+                function getCookie(name) {
+                    let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                    if (match) return match[2];
+                }
+            }
+        }
+    </script>
+    <script>
+      (function (doc, head) {
+        // Amplitude Web Experiment, anti-flicker async loader with Segment
+        // integration. https://amplitude.com/docs/web-experiment/implementation
+        // Must stay below the Segment snippet: integration=segment relies on
+        // the window.analytics stub existing before this script loads.
+        // Temporary: hard-coded staging key. Restore the per-environment setting before going to production.
+        var isStaging = window.location.hostname.indexOf("staging") !== -1;
+        var amplitudeProjectApiKey = isStaging
+          ? "adaeca3d9e5c1f8c7f4ecd803f887eeb" // Sotheby's [STG]
+          : ""; // TODO: production Amplitude project API key. Before setting this,
+          // scope the loader to experiment pages only (this theme Page-head.hbs
+          // runs site-wide) and narrow the anti-flicker style to the experiment
+          // container instead of "*" — otherwise every prod page gets a ~1s
+          // full-page blank. See PR review comment on this block.
+        if (!amplitudeProjectApiKey) {
+          return;
+        }
+        var antiFlickerTimeoutMs = 1000;
+        var antiFlickerStyleId = "amp-exp-css";
+        try {
+          if (!doc.getElementById(antiFlickerStyleId)) {
+            var antiFlickerStyle = doc.createElement("style");
+            antiFlickerStyle.id = antiFlickerStyleId;
+            antiFlickerStyle.innerText =
+              "* { visibility: hidden !important; background-image: none !important; }";
+            head.appendChild(antiFlickerStyle);
+            window.setTimeout(function () {
+              antiFlickerStyle.remove();
+            }, antiFlickerTimeoutMs);
+            var experimentScript = doc.createElement("script");
+            experimentScript.src =
+              "https://cdn.amplitude.com/script/" + amplitudeProjectApiKey + ".experiment.js?integration=segment";
+            experimentScript.async = true;
+            experimentScript.onerror = function () {
+              antiFlickerStyle.remove();
+            };
+            head.insertBefore(experimentScript, doc.currentScript || head.lastChild);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      })(document, document.head);
+    </script>
+    <link rel="preload" as="script" href="https://sothebys-com.brightspotcdn.com/resource/00000169-4eb2-d078-adfb-6eb2e0750000/styleguide/react/sothebys-components-with-react.min.a6f6deaf298ee325b5da76e32d5324b9.gz.js">
+    <link rel="stylesheet" href="https://sothebys-com.brightspotcdn.com/resource/00000169-4eb2-d078-adfb-6eb2e0750000/styleguide/All.min.56149a1f7cd73db3bebeb262a155579f.gz.css"><style>.ErrorPage-body {text-align: center; max-width: 667px; margin: 30px auto;}
+.ErrorPage-body h1 {
+  font-size: 100px;
+  line-height: 1;
+  letter-spacing: 2.6px;
+  font-weight: 400;
+  padding-bottom: 20px;
+}
+.ErrorPage-body h3 {
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: 2px;
+  padding: 0 10px 28px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.ErrorPage-body p {
+  font-size: 20px;
+  line-height: 1.2;
+  padding: 0 10px 30px;
+}</style>
+<style>.TravexPage-black-background-container[data-white-background] .TravexLocation-eventDateRange {
+    color: #000;
+}</style>
+<style>@media only screen and (max-width: 767px) {
+   .AlgoliaGeographicSearchPage .listview-results { grid-template-columns: minmax(100px, 1fr); }
+}</style>
+<style>.ServiceDetailPage-aside .Address {
+    display: none;
+}</style>
+<style>[data-preferred-content] .GallerySlide-actions {
+    display: none;
+}</style>
+<style>.SearchModule-results .Card dynamic-cta:nth-of-type(odd) a[href] { display: none; }
+.SearchModule-results .Card dynamic-cta:nth-of-type(odd) a[href*='http'] { display: flex; }</style>
+<style></style><meta name="segment-site-verification" content="XB3b8DBgKNAcJ3nmgDYEFFkbV2OS4QD7"><style></style>
+<style></style> <meta name="google-site-verification" content="jatOijsUDn6t0MH8uZbjbex1rYj2tgZZa_x1TAU32To"/> <style></style>
+<style>@media only screen and (min-width: 768px) {
+.DynamicCarousel-items[data-four-wide] .DynamicCarousel-items-item .Card .Image-uncropped, .MosaicCarousel-items[data-four-wide] .MosaicCarousel-items-item .Card .Image-uncropped {
+    max-height: 376px;
+    max-width: 100%;
+}
+}</style>
+<style>.AuctionsModule-auctionsMain[data-auctions-style=grid] .AuctionsModule-results .AuctionsModule-results-item .item .image {
+    display: flex;
+    align-items: flex-end;
+    height: 200px;
+    justify-content: center;
+}</style>
+<style>aside [class$="-cta"] {
+    display: block;
+    text-align: left;
+    margin: 0;
+    min-width: unset;
+    max-width: unset;
+}
+aside [class$="-cta"]:empty {
+    display: none;
+}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>(#32) Small pillow box, Huanghuali wood Late Ming to early Qing (1600–1700)</title>
+
+    <link rel="canonical" href="https://www.sothebys.com/en/auctions/ecatalogue/2015/ming-furniture-the-dr-s-y-yip-collection-hk0624/lot.32.html">
+    <meta name="brightspot.contentId" content="00000164-5fa0-dda0-a9fc-5ff04a300000">
+
+    <meta property="og:url" content="https://www.sothebys.com/en/auctions/ecatalogue/2015/ming-furniture-the-dr-s-y-yip-collection-hk0624/lot.32.html">
+
+<meta property="og:image" content="">
+
+
+<meta property="og:image:url" content="">
+
+<meta property="og:image:width" content="">
+<meta property="og:image:height" content="">
+    <meta property="og:image:type" content="image">
+
+
+
+    <meta property="og:locale" content="en">
+
+    <meta property="og:locale:alternate" content="en">
+
+    <meta property="og:locale:alternate" content="zh-Hant">
+
+    <meta property="og:site_name" content="Sothebys.com">
+
+
+    <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <meta property="fb:app_id" content="939141536887366">
+
+    <meta property="fb:pages" content="101894826563370">
+
+<meta property="article:tag" content="Hong Kong"><link rel="alternate" href="https://www.sothebys.com/en/auctions/ecatalogue/2015/ming-furniture-the-dr-s-y-yip-collection-hk0624/lot.32.html" hreflang="en" /><link rel="alternate" href="https://www.sothebys.com/zh/auctions/ecatalogue/2015/ming-furniture-the-dr-s-y-yip-collection-hk0624/lot.32.html" hreflang="zh-Hant" /><link rel="apple-touch-icon"sizes="180x180"href="/apple-touch-icon.png">
+<link rel="icon"type="image/png"href="/favicon-32x32.png">
+<link rel="icon"type="image/png"href="/favicon-16x16.png">
+
+    
+    <script>
+        !function () { "use strict"; !function () { if (void 0 === window.Reflect || void 0 === window.customElements || window.customElements.polyfillWrapFlushCallback) return; const t = HTMLElement; window.HTMLElement = { HTMLElement: function () { return Reflect.construct(t, [], this.constructor) } }.HTMLElement, HTMLElement.prototype = t.prototype, HTMLElement.prototype.constructor = HTMLElement, Object.setPrototypeOf(HTMLElement, t) }() }();
+    </script>
+    
+    <script>
+        !function () { "use strict"; var n, t = !1, o = [], d = !1; function e() { window.WebComponents.ready = !0, document.dispatchEvent(new CustomEvent("WebComponentsReady", { bubbles: !0 })) } function i() { window.customElements && customElements.polyfillWrapFlushCallback && customElements.polyfillWrapFlushCallback(function (e) { n = e, d && n() }) } function r() { window.HTMLTemplateElement && HTMLTemplateElement.bootstrap && HTMLTemplateElement.bootstrap(window.document), t = !0, c().then(e) } function c() { d = !1; var e = o.map(function (e) { return e instanceof Function ? e() : e }); return o = [], Promise.all(e).then(function () { d = !0, n && n() }).catch(function (e) { console.error(e) }) } window.WebComponents = window.WebComponents || {}, window.WebComponents.ready = window.WebComponents.ready || !1, window.WebComponents.waitFor = window.WebComponents.waitFor || function (e) { e && (o.push(e), t && c()) }, window.WebComponents._batchCustomElements = i; var a = "webcomponents-loader.js", l = []; "attachShadow" in Element.prototype && "getRootNode" in Element.prototype && (!window.ShadyDOM || !window.ShadyDOM.force) || l.push("sd"), window.customElements && !window.customElements.forcePolyfill || l.push("ce"); var s, m, w, u = function () { var e = document.createElement("template"); if (!("content" in e)) return !0; if (!(e.content.cloneNode() instanceof DocumentFragment)) return !0; var n = document.createElement("template"); n.content.appendChild(document.createElement("div")), e.content.appendChild(n); var t = e.cloneNode(!0); return 0 === t.content.childNodes.length || 0 === t.content.firstChild.content.childNodes.length }(); window.Promise && Array.from && window.URL && window.Symbol && !u || (l = ["sd-ce-pf"]), l.length ? (s = "bundles/webcomponents-" + l.join("-") + ".js", m = window.WebComponents.root ? window.WebComponents.root + s : document.querySelector('script[src*="' + a + '"]').src.replace(a, s), (w = document.createElement("script")).src = m, "loading" === document.readyState ? (w.setAttribute("onload", "window.WebComponents._batchCustomElements()"), document.write(w.outerHTML), document.addEventListener("DOMContentLoaded", r)) : (w.addEventListener("load", function () { i(), r() }), w.addEventListener("error", function () { throw new Error("Could not load polyfill bundle" + m) }), document.head.appendChild(w))) : "complete" === document.readyState ? (t = !0, e()) : (window.addEventListener("load", r), window.addEventListener("DOMContentLoaded", function () { window.removeEventListener("load", r), r() })) }();
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.5/keen-slider.min.css" />
+    <!-- Add Webcomponents Loader -->
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.5.0/webcomponents-loader.js"></script>
+
+    <!-- Add Custom Elements ES5 Adapter -->
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.5.0/custom-elements-es5-adapter.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+
+    <script src="/core/page/ym-utils.js"></script>
+    <script src="https://sothebys-com.brightspotcdn.com/resource/00000169-4eb2-d078-adfb-6eb2e0750000/styleguide/All.min.4308fb2a7c3f89b181088727395465e5.gz.js" async></script><script>
+    window.fbAsyncInit = function() {
+    FB.init({
+    
+        appId : '939141536887366',
+    
+    xfbml : true,
+    version : 'v2.9'
+    });
+    };
+    (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<script>!function(e){var o={};function t(r){if(o[r])return o[r].exports;var n=o[r]={i:r,l:!1,exports:{}};return e[r].call(n.exports,n,n.exports,t),n.l=!0,n.exports}t.m=e,t.c=o,t.d=function(e,o,r){t.o(e,o)||Object.defineProperty(e,o,{enumerable:!0,get:r})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,o){if(1&o&&(e=t(e)),8&o)return e;if(4&o&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(t.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&o&&"string"!=typeof e)for(var n in e)t.d(r,n,function(o){return e[o]}.bind(null,n));return r},t.n=function(e){var o=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(o,"a",o),o},t.o=function(e,o){return Object.prototype.hasOwnProperty.call(e,o)},t.p="",t(t.s=10)}([function(e,o,t){"use strict";Object.defineProperty(o,"__esModule",{value:!0}),o.getCampaigns=o.getCookie=o.removeCookie=o.setCookie=o.getQueryParam=o.isUrlSecure=void 0;var r=function(e){return e&&e.__esModule?e:{default:e}}(t(7)),n=function(e){if(e&&e.__esModule)return e;var o={};if(null!=e)for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&(o[t]=e[t]);return o.default=e,o}(t(3));var a=function(e,o){try{return e[o]}catch(e){}},i=(o.isUrlSecure=function(e){var o=new r.default(e);return!!o&&"https:"===o.protocol},o.getQueryParam=function(e,o){var t=new r.default(e,!0);if(!Array.isArray(o))return a(t.query,o);var n=void 0,i=!0,s=!1,u=void 0;try{for(var c,l=o[Symbol.iterator]();!(i=(c=l.next()).done);i=!0){var f=c.value,m=a(t.query,f);m&&(void 0===n&&(n={}),n[f]=m)}}catch(e){s=!0,u=e}finally{try{!i&&l.return&&l.return()}finally{if(s)throw u}}return null===n?void 0:n});o.setCookie=function(e){var o=e.name,t=e.value,r=e.expires,a=void 0===r?1:r,i=e.path,s={};a&&(s.expires=a),i&&(s.path=i),n.set(o,t,a)},o.removeCookie=function(e){n.remove(e)},o.getCookie=function(e){n.get(e)},o.getCampaigns=function(e){var o=i(e,["aecmp","cmp"]);if(o){var t=o.aecmp,r=o.cmp;return t||r}}},function(e,o,t){"use strict";Object.defineProperty(o,"__esModule",{value:!0}),o.campaign=void 0;var r=t(0);o.campaign=function(e){try{var o={cookieName:"aecmp",patterns:{alwaysIgnore:[/^Simple_Registration_Complete$/],ignoreIfPrior:[/^email_SimpleAccountWelcome_Estimates_zaius_\d{1,2}-[a-z]{1,3}-\d{1,2}$/i]}},t=function(e,o){return e.test(o)},n=(0,r.getCookie)(o.cookieName);n&&!0===o.patterns.alwaysIgnore.some(function(e){return t(e,n)})&&((0,r.removeCookie)(o.cookieName),n=void 0);var a=(0,r.getCampaigns)(e);if(!a)return;if(n&&n===a)return;if(!0===o.patterns.alwaysIgnore.some(function(e){return t(e,a)}))return;if(!n)return void(0,r.setCookie)({name:o.cookieName,value:a,expires:30});if(!0===o.patterns.ignoreIfPrior.some(function(e){return t(e,a)}))return;(0,r.setCookie)({name:o.cookieName,value:a,expires:30})}catch(e){console.error(e)}}},function(e,o,t){"use strict";Object.defineProperty(o,"__esModule",{value:!0}),o.traffic=void 0;var r=t(0);o.traffic=function(e,o){try{var t=(0,r.isUrlSecure)(o),n=function(e){return"AE-"+e},a={set:function(e,o){t?window.sessionStorage.setItem(n(e),"string"==typeof o?o:JSON.stringify(o)):(0,r.setCookie)({name:n(e),value:o})},get:function(e){if(t)return window.sessionStorage.getItem(n(e));(0,r.getCookie)(n(e))},remove:function(e){if(t)return window.sessionStorage.removeItem(n(e));(0,r.removeCookie)(n(e))},replace:function(e){if(t&&!window.sessionStorage.getItem(n(e))){var o=(0,r.getCookie)(n(e));o&&(window.sessionStorage.setItem(n(e),o),(0,r.removeCookie)(n(e)))}}},i=void 0,s=void 0,u=void 0,c=void 0,l=void 0,f={keyName:"aetrfc",referrer:e,types:{d:"direct",r:"referral",o:"organic",p:"paid",c:"campaign"},internalDomains:["sothebys.com","auth0.com","sothebys.io"],patterns:{alwaysIgnore:[/^Simple_Registration_Complete$/],ignoreIfPrior:[/^email_SimpleAccountWelcome_Estimates_zaius_\d{1,2}-[a-z]{1,3}-\d{1,2}$/i],href:/(?:https?:\/\/)?((?:[\w-.])+)(?:\/?$|(?:\/?[^\?]\/?)+)(?:(?:\?)([^#]+))?/i},searchEngines:[{n:"360.cn",u:["360.cn"],q:"q"},{n:"Alice",u:["www.alice.com","aliceadsl.fr"],q:"qs"},{n:"Alltheweb",u:["www.alltheweb.com"],q:"q"},{n:"Altavista",u:["www.altavista.com"],q:"q"},{n:"AOL",u:["www.aol.com"],q:["encquery, q, query"]},{n:"Ask",u:["www.ask.com","search.aol.","alicesuche.aol."],q:"q"},{n:"Auone",u:["search.auone.jp"],q:"q"},{n:"Avg",u:["isearch.avg.com"],q:"q"},{n:"Babylon",u:["search.babylon.com"],q:"q"},{n:"Baidu",u:["www.baidu.com"],q:"wd, word"},{n:"Biglobe",u:["biglobe.ne.jp"],q:"q"},{n:"Bing",u:["www.bing."],q:"q"},{n:"Centrum.cz",u:["search.centrum.cz"],q:"q"},{n:"Comcast",u:["search.comcast.net"],q:"q"},{n:"Conduit",u:["search.conduit.com"],q:"q"},{n:"CNN",u:["www.cnn.com/SEARCH"],q:"query"},{n:"Daum",u:["www.daum.net"],q:"q"},{n:"Ekolay",u:["www.ekolay.net"],q:"q"},{n:"Eniro",u:["www.eniro.se"],q:"search_word"},{n:"Globo",u:["www.globo.com/busca"],q:"q"},{n:"go.mail.ru",u:["go.mail.ru"],q:"q"},{n:"Google",u:["www.google."],q:"q"},{n:"goo.ne",u:["goo.ne.jp"],q:"MT"},{n:"haosou.com",u:["www.haosou.com/s"],q:"q"},{n:"Incredimail",u:["search.incredimail.com"],q:"q"},{n:"Kvasir",u:["www.kvasir.no"],q:"q"},{n:"Live",u:["www.bing."],q:"q"},{n:"Lycos",u:["www.lycos."],q:"q"},{n:"Lycos",u:["search.lycos."],q:"query"},{n:"Mamma",u:["www.mamma.com"],q:"query"},{n:"MSN",u:["www.msn.com","money.msn.com","local.msn.com"],q:"q"},{n:"Mynet",u:["www.mynet.com"],q:"q"},{n:"Najdi",u:["najdi.si"],q:"q"},{n:"Naver",u:["www.naver.com"],q:"query"},{n:"Netscape",u:["search.netscape.com"],q:"query"},{n:"ONET",u:["szukaj.onet.pl"],q:"q, qt"},{n:"Ozu",u:["www.ozu.es"],q:"q"},{n:"PCHome",u:["www.pchome.com"],q:"q"},{n:"Rakuten",u:["rakuten."],q:"qt"},{n:"Rambler",u:["rambler.ru"],q:"query"},{n:"Search-results",u:["search-results.com"],q:"q"},{n:"search.smt.docomo",u:["search.smt.docomo.ne.jp"],q:"MT"},{n:"Sesam",u:["sesam.no"],q:"q"},{n:"Seznam",u:["www.seznam.cz"],q:"q"},{n:"So.com",u:["www.so.com/s"],q:"q"},{n:"Sogou",u:["www.sogou.com"],q:"query"},{n:"Startsiden",u:["www.startsiden.no/sok"],q:"q"},{n:"Szukacz",u:["www.szukacz.pl"],q:"q"},{n:"Terra",u:["buscador.terra.com.br"],q:"query"},{n:"Tut.by",u:["search.tut.by"],q:"query"},{n:"Ukr",u:["search.ukr.net"],q:"q"},{n:"Virgilio",u:["search.virgilio.it"],q:"qs"},{n:"Voila",u:["www.voila.fr"],q:"rdata"},{n:"Wirtulana Polska",u:["www.wp.pl"],q:"szukaj"},{n:"Yahoo",u:["www.yahoo.","yahoo.","m.yahoo.com"],q:"p"},{n:"Yandex",u:["www.yandex.com","yandex.ru"],q:"text"},{n:"Yam",u:["www.yam.com"],q:"k"}]},m=(0,r.getCampaigns)(o),p=!1;if(f.internalDomains.map(function(e){f.referrer.indexOf(e)>-1&&(p=!0)}),p)return void a.replace(f.keyName);var w=f.referrer.match(f.patterns.href);if(null===w)i=f.types.d;else{var h=w[1];l=h||"".toLowerCase();var y=null;f.searchEngines.map(function(e,o){(Array.isArray(e.u)?e.u:[e.u]).map(function(o){h.indexOf(o.toLowerCase())>-1&&(y=e)})});var d=null;try{d=f.referrer.split("?")[0]}catch(e){}u=d,null===y?i=f.types[m?"c":"r"]:(i=f.types[m?"p":"o"],s=y.n,c=function(o){if(!Array.isArray(o))return(0,r.getQueryParam)(e,o)||"";var t=(0,r.getQueryParam)(e,o);if(!t)return"";console.log(JSON.stringify(t,null,2));var n="";for(var a in t)n=n+(n?" ":"")+t[a];return n}(y.q))}var q={type:i,entry_path:window.location.pathname};s&&(q.source=s),l&&(q.domain=l),u&&(q.referring_url=u),c&&(q.keywords=c),a.set(f.keyName,q)}catch(e){console.error(e)}}},function(e,o,t){"use strict";Object.defineProperty(o,"__esModule",{value:!0});o.get=function(e){try{var o=new RegExp(e+"=([^;]+)").exec(document.cookie);try{return JSON.parse(o[1])}catch(e){return o[1]}}catch(e){}},o.set=function(e,o,t){var r=new Date;r.setTime(r.getTime()+86400*t*1e3),document.cookie=e+"="+JSON.stringify(o)+";expires="+r.toUTCString()+"; path=/"},o.remove=function(e){document.cookie=e+"=;expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/"}},function(e,o,t){"use strict";var r=Object.prototype.hasOwnProperty;function n(e){return decodeURIComponent(e.replace(/\+/g," "))}o.stringify=function(e,o){o=o||"";var t=[];for(var n in"string"!=typeof o&&(o="?"),e)r.call(e,n)&&t.push(encodeURIComponent(n)+"="+encodeURIComponent(e[n]));return t.length?o+t.join("&"):""},o.parse=function(e){for(var o,t=/([^=?&]+)=?([^&]*)/g,r={};o=t.exec(e);){var a=n(o[1]),i=n(o[2]);a in r||(r[a]=i)}return r}},function(e,o,t){"use strict";e.exports=function(e,o){if(o=o.split(":")[0],!(e=+e))return!1;switch(o){case"http":case"ws":return 80!==e;case"https":case"wss":return 443!==e;case"ftp":return 21!==e;case"gopher":return 70!==e;case"file":return!1}return 0!==e}},function(e,o,t){"use strict";var r,n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};r=function(){return this}();try{r=r||Function("return this")()||(0,eval)("this")}catch(e){"object"===("undefined"==typeof window?"undefined":n(window))&&(r=window)}e.exports=r},function(e,o,t){"use strict";(function(o){var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},n=t(5),a=t(4),i=/^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i,s=/^[A-Za-z][A-Za-z0-9+-.]*:\/\//,u=[["#","hash"],["?","query"],["/","pathname"],["@","auth",1],[NaN,"host",void 0,1,1],[/:(\d+)$/,"port",void 0,1],[NaN,"hostname",void 0,1,1]],c={hash:1,query:1};function l(e){var t,n=o&&o.location||{},a={},i=void 0===(e=e||n)?"undefined":r(e);if("blob:"===e.protocol)a=new m(unescape(e.pathname),{});else if("string"===i)for(t in a=new m(e,{}),c)delete a[t];else if("object"===i){for(t in e)t in c||(a[t]=e[t]);void 0===a.slashes&&(a.slashes=s.test(e.href))}return a}function f(e){var o=i.exec(e);return{protocol:o[1]?o[1].toLowerCase():"",slashes:!!o[2],rest:o[3]}}function m(e,o,t){if(!(this instanceof m))return new m(e,o,t);var i,s,c,p,w,h,y=u.slice(),d=void 0===o?"undefined":r(o),q=this,v=0;for("object"!==d&&"string"!==d&&(t=o,o=null),t&&"function"!=typeof t&&(t=a.parse),o=l(o),i=!(s=f(e||"")).protocol&&!s.slashes,q.slashes=s.slashes||i&&o.slashes,q.protocol=s.protocol||o.protocol||"",e=s.rest,s.slashes||(y[2]=[/(.*)/,"pathname"]);v<y.length;v++)c=(p=y[v])[0],h=p[1],c!=c?q[h]=e:"string"==typeof c?~(w=e.indexOf(c))&&("number"==typeof p[2]?(q[h]=e.slice(0,w),e=e.slice(w+p[2])):(q[h]=e.slice(w),e=e.slice(0,w))):(w=c.exec(e))&&(q[h]=w[1],e=e.slice(0,w.index)),q[h]=q[h]||i&&p[3]&&o[h]||"",p[4]&&(q[h]=q[h].toLowerCase());t&&(q.query=t(q.query)),i&&o.slashes&&"/"!==q.pathname.charAt(0)&&(""!==q.pathname||""!==o.pathname)&&(q.pathname=function(e,o){for(var t=(o||"/").split("/").slice(0,-1).concat(e.split("/")),r=t.length,n=t[r-1],a=!1,i=0;r--;)"."===t[r]?t.splice(r,1):".."===t[r]?(t.splice(r,1),i++):i&&(0===r&&(a=!0),t.splice(r,1),i--);return a&&t.unshift(""),"."!==n&&".."!==n||t.push(""),t.join("/")}(q.pathname,o.pathname)),n(q.port,q.protocol)||(q.host=q.hostname,q.port=""),q.username=q.password="",q.auth&&(p=q.auth.split(":"),q.username=p[0]||"",q.password=p[1]||""),q.origin=q.protocol&&q.host&&"file:"!==q.protocol?q.protocol+"//"+q.host:"null",q.href=q.toString()}m.prototype={set:function(e,o,t){var r=this;switch(e){case"query":"string"==typeof o&&o.length&&(o=(t||a.parse)(o)),r[e]=o;break;case"port":r[e]=o,n(o,r.protocol)?o&&(r.host=r.hostname+":"+o):(r.host=r.hostname,r[e]="");break;case"hostname":r[e]=o,r.port&&(o+=":"+r.port),r.host=o;break;case"host":r[e]=o,/:\d+$/.test(o)?(o=o.split(":"),r.port=o.pop(),r.hostname=o.join(":")):(r.hostname=o,r.port="");break;case"protocol":r.protocol=o.toLowerCase(),r.slashes=!t;break;case"pathname":case"hash":if(o){var i="pathname"===e?"/":"#";r[e]=o.charAt(0)!==i?i+o:o}else r[e]=o;break;default:r[e]=o}for(var s=0;s<u.length;s++){var c=u[s];c[4]&&(r[c[1]]=r[c[1]].toLowerCase())}return r.origin=r.protocol&&r.host&&"file:"!==r.protocol?r.protocol+"//"+r.host:"null",r.href=r.toString(),r},toString:function(e){e&&"function"==typeof e||(e=a.stringify);var o,t=this,n=t.protocol;n&&":"!==n.charAt(n.length-1)&&(n+=":");var i=n+(t.slashes?"//":"");return t.username&&(i+=t.username,t.password&&(i+=":"+t.password),i+="@"),i+=t.host+t.pathname,(o="object"===r(t.query)?e(t.query):t.query)&&(i+="?"!==o.charAt(0)?"?"+o:o),t.hash&&(i+=t.hash),i}},m.extractProtocol=f,m.location=l,m.qs=a,e.exports=m}).call(this,t(6))},function(e,o,t){"use strict";Object.defineProperty(o,"__esModule",{value:!0}),o.affiliate=void 0;var r=t(0);o.affiliate=function(e){try{var o=(0,r.getQueryParam)(e,["ranSiteID","clickdate"]);if(!o)return;var t=o.ranSiteID,n=o.clickdate;if(!t||!n)return;(0,r.removeCookie)("aeaffd"),(0,r.setCookie)({name:"aeaffd",value:{click_date:n,site_id:t},expires:30})}catch(e){console.error(e)}}},function(e,o,t){"use strict";var r=t(8),n=t(2),a=t(1);try{var i=window.location.href,s=document.referrer;(0,r.affiliate)(i),(0,n.traffic)(s,i),(0,a.campaign)(i)}catch(e){console.error(e)}},function(e,o,t){e.exports=t(9)}]);</script>
+<script>(function() {    
+    var getCookie = function(name) {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+
+    var aecmpCookie = getCookie('aecmp');
+    if (aecmpCookie !== undefined) {
+        document.cookie = 'aecmp=' + encodeURI(decodeURI(getCookie('aecmp'))) +  ';path=/;expires=' + new Date(new Date().getTime() + 60*60*24*30*1000).toUTCString();
+    }
+})();</script>
+</head>
+
+
+<body class="LotPage-body this_one" data-redactable-token="-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDRb97BL8ZGr5j5RXxzNTylUcOWnccyXmt84115ojFVg1x1nsHpCRM4cCVu1LoWw7gRVa6q8ShYeP5yQDue3uGdawziPBYOq8lbuL8uxiSAkvIkbjm9p3Ud1OHFchTdIRvuRswvtsJr9qaf3hDHPKbSnw+n8ypenWacqVAF3/McLQIDAQAB-----END PUBLIC KEY-----"
+    data-page-properties='{
+      "0": "","jwt_key_prefix": "http://schemas.sothebys.com","auth0Domain": [&quot;accounts.sothebys.com&quot;],"auth0ClientID": "T7hr3mPabRS4lVwwyVr7gqCzF8Lg0m7s","auth0Audience": "https://customer.api.sothebys.com","jwtIssuer": "www.sothebys.com","domain": "sothebys.com","vikingClientApi": "https://clientapi.prod.sothelabs.com/graphql"}'
+    data-tracking='{"content_type": "Auctions","department_category": "Chinese Works of Art","name": "Auctions: Ecatalogue: 2015: Ming Furniture The Dr S Y Yip Collection Hk0624: Lot 32 Html","language": "English","sale_id": "HK0624","lot_id": "HK0624 : 32",
+    "preferred_content": "false"
+    }'>
+
+    <div data-sothebys-component-url="header" data-brightspot-hosted="true"></div>
+    
+    
+    <main class="LotPage-main data-lot-page-module">
+        <div class="LotPage-breadcrumbs">
+            <div class="LotPage-breadcrumbs-breadcrumb">
+                <a class="Link" href="https://www.sothebys.com/en/auctions/2015/ming-furniture-the-dr-s-y-yip-collection-hk0624.html">Ming Furniture – The Dr S Y Yip Collection</a>
+                <p class="LotPage-breadcrumbs-divider">/</p>
+            </div>
+            <div class="LotPage-breadcrumbs-breadcrumb">
+                <span class="Link">Lot 32</span>
+            </div>
+        </div>
+
+        <div class="LotPage-productHead">
+            
+                <div class="LotPage-productMedia">
+                    <div class="VerticalNavGallery data-vertical-nav-gallery" data-vertical-nav-gallery>
+    
+        <div class="VerticalNavGallery-slides"><div class="VerticalNavGallery-slides-slide"><div class="VerticalNavGallerySlide" data-slug="063hk0624-8gp5m-jpg" >
+    <div class="VerticalNavGallerySlide-media">
+        
+            <div class="VerticalNavGallerySlide-mediaContent">
+                
+                    <picture>
+    
+    
+        
+            
+        
+    
+
+    
+    
+        
+    
+        <source type="image/webp"  width="566"
+     height="279"
+    data-srcset="https://sothebys-com.brightspotcdn.com/dims4/default/4fac587/2147483647/strip/true/crop/2000x986+0+0/resize/2880x1420!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot-migration.s3.amazonaws.com%2F14%2Fa0%2Fe4%2Fc23aaebb493e34b3db43aa51ed21b66b16c17cd3f2cb81419b6c9f1e6d%2F063hk0624-8gp5m.jpg 2880w" srcset='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgaGVpZ2h0PSIyNzlweCIgd2lkdGg9IjU2NnB4Ij48L3N2Zz4='
+/>
+    
+
+    
+        <source width="566"
+     height="279"
+    data-srcset="https://sothebys-com.brightspotcdn.com/dims4/default/e167641/2147483647/strip/true/crop/2000x986+0+0/resize/566x279!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot-migration.s3.amazonaws.com%2F14%2Fa0%2Fe4%2Fc23aaebb493e34b3db43aa51ed21b66b16c17cd3f2cb81419b6c9f1e6d%2F063hk0624-8gp5m.jpg" srcset='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgaGVpZ2h0PSIyNzlweCIgd2lkdGg9IjU2NnB4Ij48L3N2Zz4='
+/>
+    
+
+    
+    
+    <img class="Image lazyload " alt="" data-srcset="https://sothebys-com.brightspotcdn.com/dims4/default/9f6add5/2147483647/strip/true/crop/2000x986+0+0/resize/2880x1420!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot-migration.s3.amazonaws.com%2F14%2Fa0%2Fe4%2Fc23aaebb493e34b3db43aa51ed21b66b16c17cd3f2cb81419b6c9f1e6d%2F063hk0624-8gp5m.jpg 2880w" width="566" height="279"
+        data-src="https://sothebys-com.brightspotcdn.com/dims4/default/e167641/2147483647/strip/true/crop/2000x986+0+0/resize/566x279!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot-migration.s3.amazonaws.com%2F14%2Fa0%2Fe4%2Fc23aaebb493e34b3db43aa51ed21b66b16c17cd3f2cb81419b6c9f1e6d%2F063hk0624-8gp5m.jpg" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgaGVpZ2h0PSIyNzlweCIgd2lkdGg9IjU2NnB4Ij48L3N2Zz4="
+    >
+
+</picture>
+                
+            </div>
+        
+        
+    </div>
+    
+    
+</div>
+</div></div>
+    
+    <ul class="VerticalNavGallery-nav"><li class="VerticalNavGallery-nav-item is-nav-selected">
+                
+                    
+                        <picture>
+    
+    
+        
+            
+        
+    
+
+    
+    
+        
+    
+        <source type="image/webp"  width="94"
+     height="94"
+    data-srcset="https://sothebys-com.brightspotcdn.com/dims4/default/aa14334/2147483647/strip/true/crop/986x986+507+0/resize/94x94!/format/webp/quality/90/?url=http%3A%2F%2Fsothebys-brightspot-migration.s3.amazonaws.com%2F14%2Fa0%2Fe4%2Fc23aaebb493e34b3db43aa51ed21b66b16c17cd3f2cb81419b6c9f1e6d%2F063hk0624-8gp5m.jpg" srcset='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgaGVpZ2h0PSI5NHB4IiB3aWR0aD0iOTRweCI+PC9zdmc+'
+/>
+    
+
+    
+        <source width="94"
+     height="94"
+    data-srcset="https://sothebys-com.brightspotcdn.com/dims4/default/3c0a138/2147483647/strip/true/crop/986x986+507+0/resize/94x94!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot-migration.s3.amazonaws.com%2F14%2Fa0%2Fe4%2Fc23aaebb493e34b3db43aa51ed21b66b16c17cd3f2cb81419b6c9f1e6d%2F063hk0624-8gp5m.jpg" srcset='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgaGVpZ2h0PSI5NHB4IiB3aWR0aD0iOTRweCI+PC9zdmc+'
+/>
+    
+
+    
+    
+    <img class="Image lazyload " alt="" width="94" height="94"
+        data-src="https://sothebys-com.brightspotcdn.com/dims4/default/3c0a138/2147483647/strip/true/crop/986x986+507+0/resize/94x94!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot-migration.s3.amazonaws.com%2F14%2Fa0%2Fe4%2Fc23aaebb493e34b3db43aa51ed21b66b16c17cd3f2cb81419b6c9f1e6d%2F063hk0624-8gp5m.jpg" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgaGVpZ2h0PSI5NHB4IiB3aWR0aD0iOTRweCI+PC9zdmc+"
+    >
+
+</picture>
+                    
+                
+            </li></ul>
+</div>
+
+                </div>
+            
+            <div class="LotPage-productInfo">
+                <ul class="LotPage-aboveTitle" data-align-center>
+                    
+                    <li class="LotPage-currProduct">32</li>
+                    
+                </ul>
+                
+                <h1 class="LotPage-productTitle">Small pillow box, Huanghuali wood Late Ming to early Qing (1600–1700)</h1>
+                
+                
+                <div class="LotPage-estimateInfo">
+                    <div class="LotPage-estimate">Estimate</div>
+                    <div class="LotPage-estimatePrice">
+                        60,000 - 60,000 HKD
+                    </div>
+                </div>
+                
+                
+                <div class="LotPage-biddingClosed">bidding is closed</div>
+            </div>
+            <div class="LotPage-details">
+                <h2 class="LotPage-detailsTitle">
+                    Description
+                </h2>
+                <ul class="LotPage-lotDetails">
+                    <li class="LotPage-artistName"></li>
+                    <li class="LotPage-artistDates"></li>
+                    <li class="LotPage-pieceTitle"></li>
+                    
+                    
+                    
+                    
+                    
+                </ul>
+                <div class="LotPage-lotDescription">
+                    The top plank of the box is curved and it is thought that this type of small boxes were also used as travelling pillows.
+                </div>
+
+                
+
+                
+                    <h2 class="LotPage-detailsTitle">
+                        Exhibited
+                    </h2>
+                    <div class="LotPage-lotDescription">
+                        Hong Kong, 2007, Art Museum, The Chinese University of Hong Kong, &ldquo;Feast by a wine table reclining on a couch: The Dr. S. Y. Yip Collection of Classic Chinese Furniture III&rdquo;
+                    </div>
+                
+
+                
+                    <h2 class="LotPage-detailsTitle">
+                        Literature
+                    </h2>
+                    <div class="LotPage-lotDescription">
+                        Grace Wu Bruce, <em>Feast by a wine table reclining on a couch: The Dr. S. Y. Yip Collection of Classic Chinese Furniture III,</em> Hong Kong, 2007, pp. 166 &ndash; 167
+                    </div>
+                
+
+                
+
+                
+                    <h2 class="LotPage-detailsTitle">
+                        Catalogue Note
+                    </h2>
+                    <div class="LotPage-lotDescription">
+                        This classical design was used by craftsmen to fashion small boxes, like the present example, after large storage chest for clothing. This small box is completely plain except for the beaded edges where the lid meets the body of the box. This beading serves as a subtle decoration as well as to improve the durability of the box by enlarging the area of the surface of contact.<br />The corner application of <em>baitong</em> mounts serves both as decoration and as reinforcement of the joins, making these boxes also suitable for the storage of heavy valuable items like jewellry, cash and silver. It is interesting to note that boxes as small as these were fitted with handles, indicating their association with frequent carriage.
+                    </div>
+                
+
+            </div>
+        </div>
+
+        <input type="hidden" class="product_id" value="HK062432" />
+        <input type="hidden" class="sale_id" value="HK0624" />
+        <input type="hidden" class="lot_id" value="HK0624 : 32" />
+    </main>
+
+    
+
+    
+
+    <div data-sothebys-component-url="footer" data-brightspot-hosted="true"></div>
+<script type="text/javascript" src="https://shared.sothebys.com/react/v2/loader" data-syndicated-url="https://shared.sothebys.com/syndicate" data-sothebys-component-loader></script>
+    
+    
+    <script>
+        var img = document.querySelector('img')
+        function loaded() {
+            setTimeout(function () {
+                var flickityViewport = document.getElementsByClassName('flickity-viewport');
+                var image = document.getElementsByClassName('flickity-lazyloaded');
+                if (flickityViewport[0] && image[0]) {
+                    flickityViewport[0].style.height = parseInt(image[0].height) + 'px';
+                } else {
+                    loaded();
+                }
+            }, 1000)
+        }
+        if (img.complete) {
+            loaded()
+        } else {
+            img.addEventListener('load', loaded)
+        }
+    </script>
+</body>
+
+</html>

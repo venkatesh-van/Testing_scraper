@@ -1,0 +1,21 @@
+{
+  "lotId": "example-lot-001",
+  "title": "Example Artist | Zero estimate test",
+  "creatorsDisplayTitle": "Example Artist",
+  "lotNumber": {"lotDisplayNumber": "12A"},
+  "auction": {
+    "auctionId": "example-auction",
+    "sapSaleNumber": "NY1234",
+    "currency": "USD",
+    "slug": {"name": "example-sale", "year": 2025}
+  },
+  "bidState": {
+    "isClosed": true,
+    "reserveMet": false,
+    "sold": {"isSold": true, "premiums": {"finalPrice": {"currency": "USD", "amount": 0}}}
+  },
+  "estimateV2": {"lowEstimate": {"amount": 0}, "highEstimate": {"amount": 0}},
+  "withdrawnState": {"state": "NotAffected"},
+  "slug": {"lotSlug": "example-artist-zero-estimate-test"},
+  "media": {"images": []}
+}

@@ -1,0 +1,123 @@
+{
+ "_comment": "SYNTHETIC fixture shaped like the site's GraphQL reply",
+ "data": {
+  "auction": {
+   "lotCards": {
+    "hasNextPage": true,
+    "totalCount": 100,
+    "lots": [
+     {
+      "lotId": "lot-1",
+      "title": "Artist 1 | Work 1",
+      "creatorsDisplayTitle": "Artist 1",
+      "lotNumber": {
+       "lotDisplayNumber": "1"
+      },
+      "auction": {
+       "auctionId": "auc-1",
+       "sapSaleNumber": "HK0001",
+       "currency": "HKD",
+       "slug": {
+        "name": "sale-x",
+        "year": 2026
+       }
+      },
+      "bidState": {
+       "isClosed": true,
+       "reserveMet": true,
+       "sold": {
+        "__typename": "ResultHidden"
+       }
+      },
+      "estimateV2": {
+       "__typename": "LowHighEstimateV2",
+       "lowEstimate": {
+        "amount": "100000"
+       },
+       "highEstimate": {
+        "amount": "200000"
+       }
+      },
+      "withdrawnState": {
+       "state": "NotAffected"
+      },
+      "slug": {
+       "lotSlug": "artist-1-work-1"
+      },
+      "media": {
+       "images": [
+        {
+         "renditions": [
+          {
+           "imageSize": "Small",
+           "url": "s.jpg"
+          },
+          {
+           "imageSize": "Large",
+           "url": "l1.jpg"
+          }
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "lotId": "lot-2",
+      "title": "Artist 2 | Work 2",
+      "creatorsDisplayTitle": "Artist 2",
+      "lotNumber": {
+       "lotDisplayNumber": "2"
+      },
+      "auction": {
+       "auctionId": "auc-1",
+       "sapSaleNumber": "HK0001",
+       "currency": "HKD",
+       "slug": {
+        "name": "sale-x",
+        "year": 2026
+       }
+      },
+      "bidState": {
+       "isClosed": true,
+       "reserveMet": true,
+       "sold": {
+        "__typename": "ResultHidden"
+       }
+      },
+      "estimateV2": {
+       "__typename": "LowHighEstimateV2",
+       "lowEstimate": {
+        "amount": "100000"
+       },
+       "highEstimate": {
+        "amount": "200000"
+       }
+      },
+      "withdrawnState": {
+       "state": "NotAffected"
+      },
+      "slug": {
+       "lotSlug": "artist-2-work-2"
+      },
+      "media": {
+       "images": [
+        {
+         "renditions": [
+          {
+           "imageSize": "Small",
+           "url": "s.jpg"
+          },
+          {
+           "imageSize": "Large",
+           "url": "l2.jpg"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ }
+}

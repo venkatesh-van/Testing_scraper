@@ -1,0 +1,68 @@
+{
+ "_comment": "SYNTHETIC fixture shaped like the site's GraphQL reply",
+ "data": {
+  "auction": {
+   "lotCards": {
+    "hasNextPage": false,
+    "totalCount": 5,
+    "lots": [
+     {
+      "lotId": "lot-4",
+      "title": "Artist 4 | Work 4",
+      "creatorsDisplayTitle": "Artist 4",
+      "lotNumber": {
+       "lotDisplayNumber": "4"
+      },
+      "auction": {
+       "auctionId": "auc-1",
+       "sapSaleNumber": "HK0001",
+       "currency": "HKD",
+       "slug": {
+        "name": "sale-x",
+        "year": 2026
+       }
+      },
+      "bidState": {
+       "isClosed": true,
+       "reserveMet": true,
+       "sold": {
+        "__typename": "ResultHidden"
+       }
+      },
+      "estimateV2": {
+       "__typename": "LowHighEstimateV2",
+       "lowEstimate": {
+        "amount": "100000"
+       },
+       "highEstimate": {
+        "amount": "200000"
+       }
+      },
+      "withdrawnState": {
+       "state": "NotAffected"
+      },
+      "slug": {
+       "lotSlug": "artist-4-work-4"
+      },
+      "media": {
+       "images": [
+        {
+         "renditions": [
+          {
+           "imageSize": "Small",
+           "url": "s.jpg"
+          },
+          {
+           "imageSize": "Large",
+           "url": "l4.jpg"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ }
+}

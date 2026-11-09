@@ -1,0 +1,172 @@
+{
+  "spider": "historical_auctions",
+  "source_version": "historical",
+  "finished_at": "2026-11-09T12:56:32+00:00",
+  "csv_file": "data/processed/historical_auctions_historical.csv",
+  "rows_written_this_run": 70,
+  "rows_skipped_already_stored": 0,
+  "rows_in_file": 70,
+  "note": "fill rates cover rows written in this run only",
+  "lot_status_counts": {
+    "unknown": 70
+  },
+  "quality_flag_counts": {
+    "legacy_layout_unverified": 70,
+    "legacy_result_unknown": 70,
+    "estimate_missing": 32
+  },
+  "columns": {
+    "auction_name": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "auction_detail": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "auction_category": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "auction_date": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "auction_url": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "lot_number": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "artist": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "title": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "year_created": {
+      "filled": 16,
+      "fill_rate": 0.2286
+    },
+    "medium": {
+      "filled": 32,
+      "fill_rate": 0.4571
+    },
+    "dimensions": {
+      "filled": 32,
+      "fill_rate": 0.4571
+    },
+    "estimate_low": {
+      "filled": 38,
+      "fill_rate": 0.5429
+    },
+    "estimate_high": {
+      "filled": 38,
+      "fill_rate": 0.5429
+    },
+    "estimate_currency": {
+      "filled": 38,
+      "fill_rate": 0.5429
+    },
+    "is_closed": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "reserve_met": {
+      "filled": 0,
+      "fill_rate": 0.0
+    },
+    "lot_status": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "is_sold": {
+      "filled": 0,
+      "fill_rate": 0.0
+    },
+    "sold_price": {
+      "filled": 0,
+      "fill_rate": 0.0
+    },
+    "sold_currency": {
+      "filled": 0,
+      "fill_rate": 0.0
+    },
+    "withdrawn_state": {
+      "filled": 0,
+      "fill_rate": 0.0
+    },
+    "result_label": {
+      "filled": 0,
+      "fill_rate": 0.0
+    },
+    "sold_price_source": {
+      "filled": 0,
+      "fill_rate": 0.0
+    },
+    "lot_id": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "auction_id": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "sale_number": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "lot_url": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "image_url": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "description": {
+      "filled": 67,
+      "fill_rate": 0.9571
+    },
+    "description_en": {
+      "filled": 67,
+      "fill_rate": 0.9571
+    },
+    "provenance": {
+      "filled": 23,
+      "fill_rate": 0.3286
+    },
+    "literature": {
+      "filled": 38,
+      "fill_rate": 0.5429
+    },
+    "exhibited": {
+      "filled": 38,
+      "fill_rate": 0.5429
+    },
+    "catalogue_note": {
+      "filled": 38,
+      "fill_rate": 0.5429
+    },
+    "scraped_at": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "source_version": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "parse_quality": {
+      "filled": 70,
+      "fill_rate": 1.0
+    },
+    "data_quality_flags": {
+      "filled": 70,
+      "fill_rate": 1.0
+    }
+  }
+}

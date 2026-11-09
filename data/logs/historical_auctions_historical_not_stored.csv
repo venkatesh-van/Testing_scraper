@@ -1,0 +1,9 @@
+﻿logged_at,run,stage,reason,url,lot_id,detail
+2026-11-08T19:11:08+00:00,2026-11-08T19:10:43+00:00,request_failed,http_404,https://www.sothebys.com/en/auctions/2015/rm-pinnacle-portfolio-n09312.html,,after 0 retries
+2026-11-08T19:11:13+00:00,2026-11-08T19:10:43+00:00,request_failed,http_404,https://www.sothebys.com/en/auctions/2015/rm-monterey-n09308.html,,after 0 retries
+2026-11-09T09:40:55+00:00,2026-11-09T09:40:34+00:00,request_failed,http_404,https://www.sothebys.com/en/auctions/2015/rm-pinnacle-portfolio-n09312.html,,after 0 retries
+2026-11-09T09:41:06+00:00,2026-11-09T09:40:34+00:00,request_failed,http_404,https://www.sothebys.com/en/auctions/2015/rm-monterey-n09308.html,,after 0 retries
+2026-11-09T10:57:39+00:00,2026-11-09T10:57:17+00:00,request_failed,http_404,https://www.sothebys.com/en/auctions/2015/rm-pinnacle-portfolio-n09312.html,,after 0 retries
+2026-11-09T10:57:42+00:00,2026-11-09T10:57:17+00:00,request_failed,http_404,https://www.sothebys.com/en/auctions/2015/rm-monterey-n09308.html,,after 0 retries
+2026-11-09T12:35:28+00:00,2026-11-09T12:35:01+00:00,request_failed,http_404,https://www.sothebys.com/en/auctions/2015/rm-pinnacle-portfolio-n09312.html,,after 0 retries
+2026-11-09T12:35:31+00:00,2026-11-09T12:35:01+00:00,request_failed,http_404,https://www.sothebys.com/en/auctions/2015/rm-monterey-n09308.html,,after 0 retries
